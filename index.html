@@ -1,0 +1,47 @@
+<html>
+<script src="jaws.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<body>
+
+<canvas width=500 height=300></canvas> 
+
+<script>
+
+
+
+
+<script>
+  function MyGameState() {
+    var player;
+    var robot;
+
+    this.setup = function() {
+      player = new jaws.Sprite({image: "player.png", x: 10, y: 200});
+      robot = new jaws.Sprite({x: 200, y: 200});
+      robot.animation = new jaws.Animation({sprite_sheet: "images/droid_11x15.png", frame_size: [11,15], frame_duration: 120});
+    }
+    this.update = function() {
+      if(jaws.pressed("left"))  { player.x--; }
+      if(jaws.pressed("right")) { player.x++; }
+      robot.setImage( robot.animation.next() );
+    }
+    this.draw = function() {
+      player.draw();
+      robot.draw();
+    }
+  }
+
+  window.onload = function() {
+    jaws.assets.add("images/droid_11x15.png");
+    jaws.assets.add("images/player.png");
+    jaws.start(MyGameState);
+  }
+jaws.start(myGameState)
+var socket = io.connect('http://localhost');
+socket.on('news', function(data) {
+    console.log(data);
+    socket.emit('my other event', {
+        my: 'data'
+    });
+});
+</script>
