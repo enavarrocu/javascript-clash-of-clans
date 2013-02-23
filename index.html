@@ -1,9 +1,14 @@
-<html>
+git st<html>
 <script src="jaws.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <body>
 
+<h1>Invash Cho Base!</h1>
+
 <canvas width=500 height=300></canvas> 
+<div id="info">
+    <h1>ViewPort and TileMap</h1>
+</div>
 
 <script>
 
@@ -13,10 +18,23 @@
 <script>
   function MyGameState() {
     var player;
-    var robot;
+    var fps;
+    var viewport;
+    var tile_map;
+    var archer_png = "Clash-of-Clans/Troops/Archer/Archer-lvl-1.png";
+    var archer_queen_stand_png = "Clash-of-Clans/Buildings/Army-Buildings/Archer-Queen-Altar/250px-Queenaltar.png";
+    var archer_queen_stands;
 
     this.setup = function() {
-      player = new jaws.Sprite({image: "player.png", x: 10, y: 200});
+      var live_info = document.getElementById("live_info");
+      archer_queen_stands = new jaws.SpriteList();
+      var world = new jaws.Rect(0, 0, 320*10, 320*2);
+      
+      /* Create the row of archer stands for the archer to stand on */
+      for(var x = 0; x < world.width; x+=32){
+        
+      }
+      player = new jaws.Sprite({image: archer_png, x: 10, y: 200});
       robot = new jaws.Sprite({x: 200, y: 200});
       robot.animation = new jaws.Animation({sprite_sheet: "images/droid_11x15.png", frame_size: [11,15], frame_duration: 120});
     }
